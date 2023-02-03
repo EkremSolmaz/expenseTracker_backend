@@ -3,7 +3,7 @@ phases:
     install:
         commands:
             # install Node 16
-            - curl -fsSL https://deb.nodesource.com/setup_18.x | -E bash - &&\
+            - curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
             - apt install -y nodejs
 
     pre_build:
