@@ -12,11 +12,11 @@ phases:
             - npm i
 
     build:
-      commands:
-        - npm start
+        commands:
+            - npm start
 
 artifacts:
-  files:
-    - "**/*"
+    files:
+        - "**/*"
     discard-paths: no
     base-directory: .
