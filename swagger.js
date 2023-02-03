@@ -7,7 +7,7 @@ const doc = {
 		title: "expense-tracker-backend",
 		description: "Description",
 	},
-	host: "localhost:3333",
+	host: "ec2-54-208-202-10.compute-1.amazonaws.com:3333",
 	schemes: ["http"],
 };
 

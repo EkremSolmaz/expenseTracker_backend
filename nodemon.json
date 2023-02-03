@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGO_PWD": "ekremekrem"
+        "MONGO_PWD": "ekremekrem",
+        "HOST": "ec2-100-26-218-66.compute-1.amazonaws.com"
     }
 }
