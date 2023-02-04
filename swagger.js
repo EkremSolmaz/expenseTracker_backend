@@ -1,17 +1,36 @@
-const swaggerAutogen = require("swagger-autogen")({
-	autoQuery: false,
-});
+var http = require("http");
 
-const doc = {
-	info: {
-		title: "expense-tracker-backend",
-		description: "Description",
-	},
-	host: "ec2-54-208-202-10.compute-1.amazonaws.com:3333",
-	schemes: ["http"],
-};
+async function getip(options) {
+	return new Promise((resolve, reject) => {
+		http.get({ host: "api.ipify.org", port: 80, path: "/" }, function (resp) {
+			resp.on("data", function (ip) {
+				resolve(ip);
+			});
+		});
+	});
+}
 
-const outputFile = "./swagger.json";
-const endpointsFiles = ["app.js"];
+async function generateSwagger() {
+	const host = (await getip()).toString();
 
-swaggerAutogen(outputFile, endpointsFiles, doc);
+	const swaggerAutogen = require("swagger-autogen")({
+		autoQuery: false,
+	});
+
+	const doc = {
+		info: {
+			title: "expense-tracker-backend",
+			description: "Description",
+		},
+		host: host,
+		schemes: ["http"],
+	};
+
+	const outputFile = "./swagger.json";
+	const endpointsFiles = ["app.js"];
+
+	swaggerAutogen(outputFile, endpointsFiles, doc);
+}
+
+generateSwagger();
+
