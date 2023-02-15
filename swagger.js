@@ -11,7 +11,8 @@ async function getip(options) {
 }
 
 async function generateSwagger() {
-	const host = (await getip()).toString();
+	// const host = (await getip()).toString();
+	const host = "localhost";
 
 	const swaggerAutogen = require("swagger-autogen")({
 		autoQuery: false,
@@ -33,4 +34,3 @@ async function generateSwagger() {
 }
 
 generateSwagger();
-

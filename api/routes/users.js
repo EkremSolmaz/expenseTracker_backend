@@ -20,15 +20,23 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
 	// #swagger.tags = ['Users']
 	// #swagger.description = 'Add a user'
-	const user = new User({
-		_id: mongoose.Types.ObjectId(),
-		name: req.body.name,
-	});
-	user.save()
-		.then(() => {
-			res.status(201).json({});
-		})
-		.catch((err) => res.status(500).json({ error: err }));
+	User.find({ name: req.body.name })
+		.exec()
+		.then((users) => {
+			if (users && users.length > 0) {
+				res.status(400).json({ error: "Username already exists!" });
+			} else {
+				const user = new User({
+					_id: mongoose.Types.ObjectId(),
+					name: req.body.name,
+				});
+				user.save()
+					.then(() => {
+						res.status(201).json({});
+					})
+					.catch((err) => res.status(500).json({ error: err }));
+			}
+		});
 });
 
 router.get("/:id", (req, res, next) => {
